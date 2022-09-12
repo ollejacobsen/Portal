@@ -34,62 +34,62 @@ const NotificationText = ({type, status, context}) => {
         const firstname = context.member.firstname || '';
         return (
             <p>
-                Welcome back{(firstname ? ', ' + firstname : '')}!<br />You've successfully signed in.
+                Välkommen tillbaka{(firstname ? ', ' + firstname : '')}!<br />Du har loggat in.
             </p>
         );
     } else if (type === 'signin' && status === 'error') {
         return (
             <p>
-                Could not sign in. Login link expired. <a href={signinPortalLink} target="_parent">Click here to retry</a>
+                Kunde inte logga in. Inloggningslänken har löpt ut. <a href={signinPortalLink} target="_parent">Klicka här för att försöka igen</a>
             </p>
         );
     } else if (type === 'signup' && status === 'success') {
         return (
             <p>
-                You've successfully subscribed to <br /><strong>{context.site.title}</strong>
+                Du prenumerar nu på <br /><strong>{context.site.title}</strong>
             </p>
         );
     } else if (type === 'signup-paid' && status === 'success') {
         return (
             <p>
-                You've successfully subscribed to <br /><strong>{context.site.title}</strong>
+                Du prenumerar nu på <br /><strong>{context.site.title}</strong>
             </p>
         );
     } else if (type === 'updateEmail' && status === 'success') {
         return (
             <p>
-                Success! Your email is updated.
+                Så där! Din e-postadress är uppdaterad.
             </p>
         );
     } else if (type === 'updateEmail' && status === 'error') {
         return (
             <p>
-                Could not update email! Invalid link.
+                Kunde inte uppdatera e-postadress! Ogiltig länk.
             </p>
         );
     } else if (type === 'signup' && status === 'error') {
         return (
             <p>
-                Signup error: Invalid link <br /><a href={singupPortalLink} target="_parent">Click here to retry</a>
+                Fel vid registrering: Ogiltig länk <br /><a href={singupPortalLink} target="_parent">Klicka här för att försöka igen</a>
             </p>
         );
     } else if (type === 'signup-paid' && status === 'error') {
         return (
             <p>
-                Signup error: Invalid link <br /><a href={singupPortalLink} target="_parent">Click here to retry</a>
+                Fel vid registrering: Ogiltig länk <br /><a href={singupPortalLink} target="_parent">Klicka här för att försöka igen</a>
             </p>
         );
     } else if (type === 'stripe:checkout' && status === 'success') {
         if (context.member) {
             return (
                 <p>
-                    Success! Your account is fully activated, you now have access to all content.
+                    Toppen! Ditt konto är aktiverat, du har nu tillgång till allt innehåll.
                 </p>
             );
         }
         return (
             <p>
-                Success! Check your email for magic link to sign-in.
+                Så där! Vi har skickat en inloggningslänk till din e-post.
             </p>
         );
     } else if (type === 'stripe:checkout' && status === 'warning') {
@@ -97,13 +97,13 @@ const NotificationText = ({type, status, context}) => {
         if (context.member) {
             return (
                 <p>
-                    Plan upgrade was cancelled.
+                    Uppgradering av nivå avbröts.
                 </p>
             );
         }
         return (
             <p>
-                Plan checkout was cancelled.
+                Uppgradering av nivå avbröts.
             </p>
         );
     }

@@ -158,8 +158,8 @@ export default class OfferPage extends React.Component {
             {
                 type: 'email',
                 value: member?.email || state.email,
-                placeholder: 'jamie@example.com',
-                label: 'Email',
+                placeholder: 'nisse@exempel.com',
+                label: 'E-post',
                 name: 'email',
                 disabled: !!member,
                 required: true,
@@ -180,8 +180,8 @@ export default class OfferPage extends React.Component {
             fields.unshift({
                 type: 'text',
                 value: member?.name || state.name,
-                placeholder: 'Jamie Larson',
-                label: 'Name',
+                placeholder: 'Nisse Nilsson',
+                label: 'Namn',
                 name: 'name',
                 disabled: !!member,
                 required: true,
@@ -309,20 +309,20 @@ export default class OfferPage extends React.Component {
     renderSubmitButton() {
         const {action, brandColor} = this.context;
         const {pageData: offer} = this.context;
-        let label = 'Continue';
+        let label = 'Fortsätt';
 
         if (offer.type === 'trial') {
-            label = 'Start ' + offer.amount + '-day free trial';
+            label = 'Påbörja ' + offer.amount + '-dagars prova på';
         }
 
         let isRunning = false;
         if (action === 'signup:running') {
-            label = 'Sending...';
+            label = 'Skickar...';
             isRunning = true;
         }
         let retry = false;
         if (action === 'signup:failed') {
-            label = 'Retry';
+            label = 'Försök igen';
             retry = true;
         }
 
@@ -350,13 +350,13 @@ export default class OfferPage extends React.Component {
         const {brandColor, onAction} = this.context;
         return (
             <div className='gh-portal-signup-message'>
-                <div>Already a member?</div>
+                <div>Redan medlem?</div>
                 <button
                     className='gh-portal-btn gh-portal-btn-link'
                     style={{color: brandColor}}
                     onClick={() => onAction('switchPage', {page: 'signin'})}
                 >
-                    <span>Sign in</span>
+                    <span>Logga in</span>
                 </button>
             </div>
         );
@@ -373,18 +373,18 @@ export default class OfferPage extends React.Component {
 
         if (offer.type === 'fixed') {
             return (
-                <h5 className="gh-portal-discount-label">{getCurrencySymbol(offer.currency)}{offer.amount / 100} off</h5>
+                <h5 className="gh-portal-discount-label">{getCurrencySymbol(offer.currency)}{offer.amount / 100} rabatt</h5>
             );
         }
 
         if (offer.type === 'trial') {
             return (
-                <h5 className="gh-portal-discount-label">{offer.amount} days free</h5>
+                <h5 className="gh-portal-discount-label">{offer.amount} gratis dagar</h5>
             );
         }
 
         return (
-            <h5 className="gh-portal-discount-label">{offer.amount}% off</h5>
+            <h5 className="gh-portal-discount-label">{offer.amount}% rabatt</h5>
         );
     }
 
@@ -453,26 +453,26 @@ export default class OfferPage extends React.Component {
         const originalPrice = this.getOriginalPrice({offer, product});
         let renewsLabel = '';
         if (discountDuration === 'once') {
-            durationLabel = `for first ${offer.cadence}`;
-            renewsLabel = `Renews at ${originalPrice}.`;
+            durationLabel = `första ${offer.cadence}`;
+            renewsLabel = `Förnyas ${originalPrice}.`;
         } else if (discountDuration === 'forever') {
-            durationLabel = `forever`;
+            durationLabel = `för alltid`;
         } else if (discountDuration === 'repeating') {
             const durationInMonths = offer.duration_in_months || '';
             if (durationInMonths === 1) {
-                durationLabel = `for first month`;
+                durationLabel = `för första månaden`;
             } else {
-                durationLabel = `for first ${durationInMonths} months`;
+                durationLabel = `för de första ${durationInMonths} månaderna`;
             }
-            renewsLabel = `Renews at ${originalPrice}.`;
+            renewsLabel = `Förnyas ${originalPrice}.`;
         }
         if (discountDuration === 'trial') {
             return (
-                <p className="footnote">Try free for {offer.amount} days, then {originalPrice}. <span class="gh-portal-cancel">Cancel anytime.</span></p>
+                <p className="footnote">Prova gratis i {offer.amount} dagar, sen {originalPrice}. <span class="gh-portal-cancel">Avbryt när som helst.</span></p>
             );
         }
         return (
-            <p className="footnote">{this.getOffAmount({offer})} off {durationLabel}. {renewsLabel}</p>
+            <p className="footnote">{this.getOffAmount({offer})} av {durationLabel}. {renewsLabel}</p>
         );
     }
 
@@ -481,11 +481,11 @@ export default class OfferPage extends React.Component {
 
         if (hasMultipleProductsFeature({site})) {
             return (
-                <h4 className="gh-portal-plan-name">{product.name} - {(offer.cadence === 'month' ? 'Monthly' : 'Yearly')}</h4>
+                <h4 className="gh-portal-plan-name">{product.name} - {(offer.cadence === 'month' ? 'Månadsvis' : 'Årsvis')}</h4>
             );
         }
         return (
-            <h4 className="gh-portal-plan-name">{(offer.cadence === 'month' ? 'Monthly' : 'Yearly')}</h4>
+            <h4 className="gh-portal-plan-name">{(offer.cadence === 'month' ? 'Månadsvis' : 'Årsvis')}</h4>
         );
     }
 
@@ -527,7 +527,7 @@ export default class OfferPage extends React.Component {
             <>
                 <div className='gh-portal-product-card top'>
                     <div className='gh-portal-product-card-header'>
-                        <h4 className="gh-portal-product-name">{product.name} - {(offer.cadence === 'month' ? 'Monthly' : 'Yearly')}</h4>
+                        <h4 className="gh-portal-product-name">{product.name} - {(offer.cadence === 'month' ? 'Månadsvis' : 'Årsvis')}</h4>
                         {this.renderOldTierPrice({offer, price})}
                         {this.renderUpdatedTierPrice({offer, currencyClass, updatedPrice, price})}
                         {this.renderOfferMessage({offer, product, price})}

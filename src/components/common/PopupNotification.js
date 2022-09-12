@@ -106,7 +106,7 @@ const CloseButton = ({hide = false, onClose}) => {
         return null;
     }
     return (
-        <CloseIcon className='closeicon' alt='Close' onClick={onClose} />
+        <CloseIcon className='closeicon' alt='Stäng' onClick={onClose} />
     );
 };
 
@@ -119,9 +119,9 @@ const NotificationText = ({message, site}) => {
         );
     }
     return (
-        <p> An unexpected error occured. Please try again or <a href={supportAddressMail} onClick={() => {
+        <p> Ett oväntat fel inträffade. Försök igen eller <a href={supportAddressMail} onClick={() => {
             supportAddressMail && window.open(supportAddressMail);
-        }}>contact support</a> if the error persists.</p>
+        }}>kontakta support</a> om felet kvarstår.</p>
     );
 };
 

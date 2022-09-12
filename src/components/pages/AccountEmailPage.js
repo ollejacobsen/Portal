@@ -39,7 +39,7 @@ export default function AccountEmailPage() {
                 setSubscribedNewsletters([]);
                 onAction('showPopupNotification', {
                     action: 'updated:success',
-                    message: `Email preference updated.`
+                    message: `E-postinställning uppdaterad.`
                 });
                 const data = {newsletters: []};
                 if (commentsEnabled) {
