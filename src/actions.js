@@ -239,7 +239,7 @@ async function editBilling({data, state, api}) {
             action: 'editBilling:failed',
             popupNotification: createPopupNotification({
                 type: 'editBilling:failed', autoHide: false, closeable: true, state, status: 'error',
-                message: 'Failed to update billing information, please try again'
+                message: 'Det gick inte att uppdatera betalnignsmetoden, försök igen'
             })
         };
     }

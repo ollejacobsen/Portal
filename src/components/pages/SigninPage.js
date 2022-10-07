@@ -61,8 +61,8 @@ export default class SigninPage extends React.Component {
             {
                 type: 'email',
                 value: state.email,
-                placeholder: 'jamie@example.com',
-                label: 'Email',
+                placeholder: 'nisse@exempel.com',
+                label: 'E-post',
                 name: 'email',
                 required: true,
                 errorMessage: errors.email || '',
@@ -76,10 +76,10 @@ export default class SigninPage extends React.Component {
         const {action} = this.context;
         let retry = false;
         const isRunning = (action === 'signin:running');
-        let label = isRunning ? 'Sending login link...' : 'Continue';
+        let label = isRunning ? 'Skickar inloggningslänk...' : 'Fortsätt';
         const disabled = isRunning ? true : false;
         if (action === 'signin:failed') {
-            label = 'Retry';
+            label = 'Försök igen';
             retry = true;
         }
         return (
@@ -99,8 +99,8 @@ export default class SigninPage extends React.Component {
         const brandColor = this.context.brandColor;
         return (
             <div className='gh-portal-signup-message'>
-                <div>Don't have an account?</div>
-                <button className='gh-portal-btn gh-portal-btn-link' style={{color: brandColor}} onClick={() => this.context.onAction('switchPage', {page: 'signup'})}><span>Sign up</span></button>
+                <div>Saknar du konto?</div>
+                <button className='gh-portal-btn gh-portal-btn-link' style={{color: brandColor}} onClick={() => this.context.onAction('switchPage', {page: 'signup'})}><span>Bli medlem</span></button>
             </div>
         );
     }
@@ -139,7 +139,7 @@ export default class SigninPage extends React.Component {
         return (
             <header className='gh-portal-signin-header'>
                 {this.renderSiteLogo()}
-                <h1 className="gh-portal-main-title">Sign in</h1>
+                <h1 className="gh-portal-main-title">Logga in</h1>
             </header>
         );
     }

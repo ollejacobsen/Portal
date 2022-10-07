@@ -158,8 +158,8 @@ export default class OfferPage extends React.Component {
             {
                 type: 'email',
                 value: member?.email || state.email,
-                placeholder: 'jamie@example.com',
-                label: 'Email',
+                placeholder: 'nisse@exempel.com',
+                label: 'E-post',
                 name: 'email',
                 disabled: !!member,
                 required: true,
@@ -180,8 +180,8 @@ export default class OfferPage extends React.Component {
             fields.unshift({
                 type: 'text',
                 value: member?.name || state.name,
-                placeholder: 'Jamie Larson',
-                label: 'Name',
+                placeholder: 'Nisse Nilsson',
+                label: 'Namn',
                 name: 'name',
                 disabled: !!member,
                 required: true,
@@ -309,20 +309,20 @@ export default class OfferPage extends React.Component {
     renderSubmitButton() {
         const {action, brandColor} = this.context;
         const {pageData: offer} = this.context;
-        let label = 'Continue';
+        let label = 'Fortsätt';
 
         if (offer.type === 'trial') {
-            label = 'Start ' + offer.amount + '-day free trial';
+            label = 'Påbörja ' + offer.amount + '-dagars gratis provperiod';
         }
 
         let isRunning = false;
         if (action === 'signup:running') {
-            label = 'Sending...';
+            label = 'Skickar...';
             isRunning = true;
         }
         let retry = false;
         if (action === 'signup:failed') {
-            label = 'Retry';
+            label = 'Försök igen';
             retry = true;
         }
 
@@ -350,13 +350,13 @@ export default class OfferPage extends React.Component {
         const {brandColor, onAction} = this.context;
         return (
             <div className='gh-portal-signup-message'>
-                <div>Already a member?</div>
+                <div>Redan medlem?</div>
                 <button
                     className='gh-portal-btn gh-portal-btn-link'
                     style={{color: brandColor}}
                     onClick={() => onAction('switchPage', {page: 'signin'})}
                 >
-                    <span>Sign in</span>
+                    <span>Logga in</span>
                 </button>
             </div>
         );
@@ -527,7 +527,7 @@ export default class OfferPage extends React.Component {
             <>
                 <div className='gh-portal-product-card top'>
                     <div className='gh-portal-product-card-header'>
-                        <h4 className="gh-portal-product-name">{product.name} - {(offer.cadence === 'month' ? 'Monthly' : 'Yearly')}</h4>
+                        <h4 className="gh-portal-product-name">{product.name} - {(offer.cadence === 'month' ? 'Månadsvis' : 'Årsvis')}</h4>
                         {this.renderOldTierPrice({offer, price})}
                         {this.renderUpdatedTierPrice({offer, currencyClass, updatedPrice, price})}
                         {this.renderOfferMessage({offer, product, price})}

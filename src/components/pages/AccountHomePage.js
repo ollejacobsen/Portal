@@ -143,13 +143,13 @@ const AccountFooter = ({onClose, handleSignout, supportAddress = ''}) => {
     return (
         <footer className='gh-portal-account-footer'>
             <ul className='gh-portal-account-footermenu'>
-                <li><button className='gh-portal-btn' name='logout' aria-label='logout' onClick={e => handleSignout(e)}>Sign out</button></li>
+                <li><button className='gh-portal-btn' name='logout' aria-label='logout' onClick={e => handleSignout(e)}>Logga ut</button></li>
             </ul>
             <div className='gh-portal-account-footerright'>
                 <ul className='gh-portal-account-footermenu'>
                     <li><a className='gh-portal-btn gh-portal-btn-branded' href={supportAddressMail} onClick={() => {
                         supportAddressMail && window.open(supportAddressMail);
-                    }}>Contact support</a></li>
+                    }}>Kontakta admin</a></li>
                 </ul>
             </div>
         </footer>
@@ -162,7 +162,7 @@ const UserHeader = () => {
     return (
         <header className='gh-portal-account-header'>
             <UserAvatar avatar={avatar} brandColor={brandColor} />
-            <h2 className="gh-portal-main-title">Your account</h2>
+            <h2 className="gh-portal-main-title">Ditt konto</h2>
         </header>
     );
 };
@@ -174,12 +174,12 @@ function getOfferLabel({offer, price, subscriptionStartDate}) {
         const discountDuration = offer.duration;
         let durationLabel = '';
         if (discountDuration === 'forever') {
-            durationLabel = `Forever`;
+            durationLabel = `För evigt`;
         } else if (discountDuration === 'repeating') {
             const durationInMonths = offer.duration_in_months || 0;
             let offerStartDate = new Date(subscriptionStartDate);
             let offerEndDate = new Date(offerStartDate.setMonth(offerStartDate.getMonth() + durationInMonths));
-            durationLabel = `Ends ${getDateString(offerEndDate)}`;
+            durationLabel = `Till ${getDateString(offerEndDate)}`;
         }
         offerLabel = `${getUpdatedOfferPrice({offer, price, useFormatted: true})}/${price.interval}${durationLabel ? ` — ${durationLabel}` : ``}`;
     }
@@ -192,7 +192,7 @@ function FreeTrialLabel({subscription, priceLabel}) {
         return (
             <p className="gh-portal-account-discountcontainer">
                 <div>
-                    <span>Free Trial – Ends {trialEnd}</span>
+                    <span>Gratis provperiod – Slutar {trialEnd}</span>
                     {/* <span>{getSubFreeTrialDaysLeft({sub: subscription})} days left</span> */}
                 </div>
             </p>
@@ -227,15 +227,15 @@ const PaidAccountActions = () => {
         let label = '';
         if (price) {
             const {amount = 0, currency, interval} = price;
-            label = `${Intl.NumberFormat('en', {currency, style: 'currency'}).format(amount / 100)}/${interval}`;
+            label = `${Intl.NumberFormat('sv', {currency, style: 'currency'}).format(amount / 100)}/${interval}`;
         }
         let offerLabelStr = getOfferLabel({price, offer, subscriptionStartDate: startDate});
         const compExpiry = getCompExpiry({member});
         if (isComplimentary) {
             if (compExpiry) {
-                label = `Complimentary - Expires ${compExpiry}`;
+                label = `Kostnadsfri - Upphör ${compExpiry}`;
             } else {
-                label = label ? `Complimentary (${label})` : `Complimentary`;
+                label = label ? `Kostnadsfri (${label})` : `Kostnadsfri`;
             }
         }
         let oldPriceClassName = '';
@@ -285,7 +285,7 @@ const PaidAccountActions = () => {
             return null;
         }
         return (
-            <button className='gh-portal-btn gh-portal-btn-list' onClick={e => openUpdatePlan(e)}>Change</button>
+            <button className='gh-portal-btn gh-portal-btn-list' onClick={e => openUpdatePlan(e)}>Ändra</button>
         );
     };
 
@@ -305,7 +305,7 @@ const PaidAccountActions = () => {
         const {action} = useContext(AppContext);
         const label = action === 'editBilling:running' ? (
             <LoaderIcon className='gh-portal-billing-button-loader' />
-        ) : 'Update';
+        ) : 'Uppdatera';
         if (isComplimentary) {
             return null;
         }
@@ -313,7 +313,7 @@ const PaidAccountActions = () => {
         return (
             <section>
                 <div className='gh-portal-list-detail'>
-                    <h3>Billing info</h3>
+                    <h3>Betalningsmedel</h3>
                     <CardLabel defaultCardLast4={defaultCardLast4} />
                 </div>
                 <button className='gh-portal-btn gh-portal-btn-list' onClick={e => onEditBilling(e)}>{label}</button>
@@ -328,7 +328,7 @@ const PaidAccountActions = () => {
             price,
             default_payment_card_last4: defaultCardLast4
         } = subscription || {};
-        let planLabel = 'Plan';
+        let planLabel = 'Nivå';
 
         // Show name of tiers if there are multiple tiers
         if (hasMultipleProductsFeature({site}) && getMemberTierName({member})) {
@@ -373,7 +373,7 @@ const AccountActions = () => {
                         <h3>{(name ? name : 'Account')}</h3>
                         <p>{email}</p>
                     </div>
-                    <button className='gh-portal-btn gh-portal-btn-list' onClick={e => openEditProfile(e)}>Edit</button>
+                    <button className='gh-portal-btn gh-portal-btn-list' onClick={e => openEditProfile(e)}>Uppdatera</button>
                 </section>
 
                 <PaidAccountActions />
@@ -393,7 +393,7 @@ function EmailNewsletterAction() {
         return null;
     }
     const subscribed = !!newsletters?.length;
-    let label = subscribed ? 'Subscribed' : 'Unsubscribed';
+    let label = subscribed ? 'Aktiv prenumeration' : 'Inaktiv prenumeration';
     const onToggleSubscription = (e, sub) => {
         e.preventDefault();
         const siteNewsletters = getSiteNewsletters({site});
@@ -404,7 +404,7 @@ function EmailNewsletterAction() {
     return (
         <section>
             <div className='gh-portal-list-detail'>
-                <h3>Email newsletter</h3>
+                <h3>Nyhetsbrev</h3>
                 <p>{label}</p>
             </div>
             <div>
@@ -427,15 +427,15 @@ function EmailPreferencesAction() {
     return (
         <section>
             <div className='gh-portal-list-detail'>
-                <h3>Emails</h3>
-                <p>Update your preferences</p>
+                <h3>Nyhetsbrev</h3>
+                <p>Uppdatera e-postinställningar</p>
             </div>
             <button className='gh-portal-btn gh-portal-btn-list' onClick={(e) => {
                 onAction('switchPage', {
                     page: 'accountEmail',
                     lastPage: 'accountHome'
                 });
-            }}>Manage</button>
+            }}>Ändra</button>
         </section>
     );
 }
@@ -485,7 +485,7 @@ const AccountWelcome = () => {
             const expiryAt = getDateString(expiryDate);
             return (
                 <div className='gh-portal-section'>
-                    <p className='gh-portal-text-center gh-portal-free-ctatext'>Your subscription will expire on {expiryAt}</p>
+                    <p className='gh-portal-text-center gh-portal-free-ctatext'>Din prenumeration löper ut den {expiryAt}</p>
                 </div>
             );
         }
@@ -497,20 +497,20 @@ const AccountWelcome = () => {
             const trialEnd = getDateString(subscription.trial_end_at);
             return (
                 <div className='gh-portal-section'>
-                    <p className='gh-portal-text-center gh-portal-free-ctatext'>Your subscription will start on {trialEnd}</p>
+                    <p className='gh-portal-text-center gh-portal-free-ctatext'>Din prenumeration startar {trialEnd}</p>
                 </div>
             );
         }
         return (
             <div className='gh-portal-section'>
-                <p className='gh-portal-text-center gh-portal-free-ctatext'>Your subscription will renew on {getDateString(currentPeriodEnd)}</p>
+                <p className='gh-portal-text-center gh-portal-free-ctatext'>Ditt abbonemang förnyas den {getDateString(currentPeriodEnd)}</p>
             </div>
         );
     }
 
     return (
         <div className='gh-portal-section'>
-            <p className='gh-portal-text-center gh-portal-free-ctatext'>You currently have a free membership, upgrade to a paid subscription for full access.</p>
+            <p className='gh-portal-text-center gh-portal-free-ctatext'>Du har för närvarande en gratis prenumeration, uppgradera till en betalprenumeration för full åtkomst.</p>
             <SubscribeButton />
         </div>
     );
@@ -527,7 +527,7 @@ const ContinueSubscriptionButton = () => {
     if (!subscription.cancel_at_period_end) {
         return null;
     }
-    const label = subscription.cancel_at_period_end ? 'Continue subscription' : 'Cancel subscription';
+    const label = subscription.cancel_at_period_end ? 'Fortsätt prenumerera' : 'Avbryt prenmeration';
     const isRunning = ['cancelSubscription:running'].includes(action);
     const disabled = (isRunning) ? true : false;
     const isPrimary = !!subscription.cancel_at_period_end;
@@ -538,7 +538,7 @@ const ContinueSubscriptionButton = () => {
         }
         const currentPeriodEnd = subscription.current_period_end;
         return (
-            <p className='gh-portal-text-center gh-portal-free-ctatext'>Your subscription will expire on {getDateString(currentPeriodEnd)}</p>
+            <p className='gh-portal-text-center gh-portal-free-ctatext'>Ditt prenumeration löper ut den {getDateString(currentPeriodEnd)}</p>
         );
     };
 

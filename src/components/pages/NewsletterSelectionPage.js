@@ -19,7 +19,7 @@ function NewsletterPrefSection({newsletter, subscribedNewsletters, setSubscribed
                     <p>{newsletter.description}</p>
                 </div>
                 <div class="gh-portal-lock-icon-container">
-                    <LockIcon className='gh-portal-lock-icon' alt='' title="Unlock access to all newsletters by becoming a paid subscriber." />
+                    <LockIcon className='gh-portal-lock-icon' alt='' title="Lås upp tillgången till alla nyhetsbrev genom att bli en betalprenumerant." />
                 </div>
             </section>
         );
@@ -76,10 +76,10 @@ export default function NewsletterSelectionPage({pageData, onBack}) {
     if (action === 'signup:running') {
         isRunning = true;
     }
-    let label = 'Continue';
+    let label = 'Nästa';
     let retry = false;
     if (action === 'signup:failed') {
-        label = 'Retry';
+        label = 'Försök igen';
         retry = true;
     }
 
@@ -124,7 +124,7 @@ export default function NewsletterSelectionPage({pageData, onBack}) {
                             onClick = {() => {
                                 onBack();
                             }}>
-                            <span>Choose a different plan</span>
+                            <span>Väl en annan nivå</span>
                         </button>
                     </div>
                 </div>

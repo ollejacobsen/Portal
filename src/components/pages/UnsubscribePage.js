@@ -98,9 +98,9 @@ export default function UnsubscribePage() {
             <div className='gh-portal-content gh-portal-unsubscribe with-footer'>
                 <CloseButton />
                 <AccountHeader />
-                <h1 className="gh-portal-main-title">Unsubscribe failed</h1>
+                <h1 className="gh-portal-main-title">Det gick inte att avsluta prenumerationen</h1>
                 <div>
-                    <p className="gh-portal-text-center">Email address not found.</p>
+                    <p className="gh-portal-text-center">E-postadressen hittades inte.</p>
                 </div>
             </div>
         );
@@ -112,17 +112,17 @@ export default function UnsubscribePage() {
             <div className='gh-portal-content gh-portal-unsubscribe with-footer'>
                 <CloseButton />
                 <AccountHeader />
-                <h1 className="gh-portal-main-title">Successfully unsubscribed</h1>
+                <h1 className="gh-portal-main-title">Prenumerationen har avslutats</h1>
                 <div>
-                    <p className='gh-portal-text-center'><strong>{member?.email}</strong> will no longer receive this newsletter.</p>
-                    <p className='gh-portal-text-center'>Didn't mean to do this? Manage your preferences
+                    <p className='gh-portal-text-center'><strong>{member?.email}</strong> kommer inte längre att få detta nyhetsbrev.</p>
+                    <p className='gh-portal-text-center'>Ångrar du dig? Gå till dina inställningar
                         <button
                             className="gh-portal-btn-link gh-portal-btn-branded gh-portal-btn-inline"
                             onClick={() => {
                                 setShowPrefs(true);
                             }}
                         >
-                        here
+                        här
                         </button>.
                     </p>
                 </div>
@@ -135,7 +135,7 @@ export default function UnsubscribePage() {
             const hideClassName = hasInteracted ? 'gh-portal-hide' : '';
             return (
                 <>
-                    <p className={`gh-portal-text-center gh-portal-header-message ${hideClassName}`}><strong>{member?.email}</strong> will no longer receive emails when someone replies to your comments.</p>
+                    <p className={`gh-portal-text-center gh-portal-header-message ${hideClassName}`}><strong>{member?.email}</strong> kommer inte längre att ta emot epost när någon svarar på din kommentar.</p>
                 </>
             );
         }
@@ -144,9 +144,7 @@ export default function UnsubscribePage() {
         });
         const hideClassName = hasInteracted ? 'gh-portal-hide' : '';
         return (
-            <>
-                <p className={`gh-portal-text-center gh-portal-header-message ${hideClassName}`}><strong>{member?.email}</strong> will no longer receive <strong>{unsubscribedNewsletter?.name}</strong> newsletter.</p>
-            </>
+            <p className={`gh-portal-text-center gh-portal-header-message ${hideClassName}`}><strong>{member?.email}</strong> kommer inte längre att ta emot <strong>{unsubscribedNewsletter?.name}</strong> nyhetsbrev.</p>
         );
     };
 
@@ -168,7 +166,7 @@ export default function UnsubscribePage() {
                 setSubscribedNewsletters([]);
                 onAction('showPopupNotification', {
                     action: 'updated:success',
-                    message: `Email preference updated.`
+                    message: `Nyhetsbrevsinställning uppdaterad.`
                 });
                 const updatedMember = await api.member.updateNewsletters({uuid: pageData.uuid, newsletters: [], enableCommentNotifications: false});
                 setMember(updatedMember);
